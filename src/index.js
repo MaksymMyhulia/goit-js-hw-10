@@ -9,6 +9,7 @@ const input = document.querySelector("input#search-box");
 const listCountry = document.querySelector(".country-list")
 const informationAboutCountry = document.querySelector(".country-info")
 listCountry.style.visibility = "hidden";
+listCountry.style.listStyle = "none";
 informationAboutCountry.style.visibility = "hidden";
 
 input.addEventListener('input', debounce(onInputSearch, DEBOUNCE_DELAY));
@@ -28,6 +29,10 @@ function onInputSearch(event) {
 fetchCountries(searchCountry)
 .then ((data) => {
     if(data.length > 10) {
+        listCountry.innerHTML = "";
+        listCountry.style.visibility = "hidden";
+        informationAboutCountry.innerHTML = "";
+        informationAboutCountry.style.visibility = "hidden";
         Notify.info("Too many matches found. Please enter a more specific name.");
         return;
     }
